@@ -42,7 +42,24 @@ export default function Navbar() {
       }
     >
       <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
-        {/* Logo */}
+        {/* Left: Hamburger button */}
+        <button
+          className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((s) => !s)}
+        >
+          {/* Icon morph: hamburger -> X */}
+          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            {menuOpen ? (
+              <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
+        </button>
+
+        {/* Center: Logo */}
         <div className="flex items-center gap-4">
           <a className="flex items-center no-underline" href="/">
             <div
@@ -50,60 +67,31 @@ export default function Navbar() {
                 "transition-transform duration-300 ease-in-out transform " +
                 (isShrunk ? "scale-90" : "scale-100")
               }
-              style={{ transformOrigin: "left center" }}
+              style={{ transformOrigin: "center" }}
             >
               {/* Replace with svg/logo */}
-              <span className="font-semibold text-lg">Jadebook</span>
+              <span className="font-semibold text-lg">Sush's Galleria</span>
             </div>
           </a>
         </div>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-6">
-          <a className="hover:underline" href="#features">Features</a>
-          <a className="hover:underline" href="#pricing">Pricing</a>
-          <a className="hover:underline" href="#about">About</a>
-        </nav>
-
-        {/* Right side: CTA + Mobile hamburger */}
-        <div className="flex items-center gap-3">
-          <a
-            className={
-              "px-4 rounded-md text-sm font-medium transition-all duration-200 " +
-              (isShrunk ? "py-1" : "py-2")
-            }
-            href="/signup"
-          >
-            Get started
-          </a>
-
-          {/* Hamburger button (visible on small screens) */}
-          <button
-            className="md:hidden p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
-            aria-expanded={menuOpen}
-            onClick={() => setMenuOpen((s) => !s)}
-          >
-            {/* Icon morph: hamburger -> X */}
-            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              {menuOpen ? (
-                <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
-        </div>
+        {/* Right: Contact button */}
+        <a
+          className="px-4 py-2 rounded-md text-sm font-medium transition-all duration-200"
+          href="/contact"
+        >
+          Contact me
+        </a>
       </div>
 
-      {/* Mobile menu overlay/drawer */}
-      {/* Using fixed full-width panel that animates from top. md:hidden ensures it's only for small screens */}
+      {/* Side menu overlay/drawer */}
+      {/* Using fixed full-height panel that animates from left. */}
       <div
         className={
-          "md:hidden fixed left-0 right-0 top-0 z-40 transition-transform duration-300 ease-in-out " +
+          "fixed left-0 top-0 h-full z-40 transition-transform duration-300 ease-in-out " +
           (menuOpen
-            ? "translate-y-0 pointer-events-auto"
-            : "-translate-y-full pointer-events-none")
+            ? "translate-x-0 pointer-events-auto"
+            : "-translate-x-full pointer-events-none")
         }
         aria-hidden={!menuOpen}
       >
@@ -117,15 +105,15 @@ export default function Navbar() {
         {/* Panel */}
         <div
           className={
-            "relative bg-white/95 backdrop-blur-sm pt-5 pb-8 shadow-lg max-h-screen overflow-auto"
+            "relative bg-white/95 backdrop-blur-sm w-80 h-full shadow-lg overflow-auto"
           }
           role="dialog"
           aria-modal="true"
         >
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="flex items-center justify-between">
+          <div className="p-6">
+            <div className="flex items-center justify-between mb-6">
               <a href="/" className="no-underline">
-                <span className="font-semibold text-lg">Jadebook</span>
+                <span className="font-semibold text-lg">Sush's Galleria</span>
               </a>
               <button
                 className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2"
@@ -138,12 +126,12 @@ export default function Navbar() {
               </button>
             </div>
 
-            <nav className="mt-6 flex flex-col gap-4 text-lg">
-              <a className="block py-2" href="#features" onClick={() => setMenuOpen(false)}>Features</a>
-              <a className="block py-2" href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
-              <a className="block py-2" href="#about" onClick={() => setMenuOpen(false)}>About</a>
+            <nav className="flex flex-col gap-4 text-lg">
+              <a className="block py-2 hover:bg-gray-100 rounded px-2" href="#features" onClick={() => setMenuOpen(false)}>Features</a>
+              <a className="block py-2 hover:bg-gray-100 rounded px-2" href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
+              <a className="block py-2 hover:bg-gray-100 rounded px-2" href="#about" onClick={() => setMenuOpen(false)}>About</a>
               <a
-                className="mt-3 inline-block px-4 py-2 rounded-md font-medium"
+                className="mt-3 inline-block px-4 py-2 rounded-md font-medium bg-blue-500 text-white hover:bg-blue-600"
                 href="/signup"
                 onClick={() => setMenuOpen(false)}
               >

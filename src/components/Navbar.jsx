@@ -28,9 +28,9 @@ export default function Navbar() {
   // prevent background scrolling when mobile menu is open
   useEffect(() => {
     if (menuOpen) {
-      document.body.style.overflow = "hidden";
+      document.body.classList.add("body-no-scroll");
     } else {
-      document.body.style.overflow = "";
+      document.body.classList.remove("body-no-scroll");
     }
   }, [menuOpen]);
 
@@ -38,13 +38,13 @@ export default function Navbar() {
     <header
       className={
         "fixed top-4 left-4 right-4 z-50 transition-all duration-300 ease-in-out rounded-lg shadow-lg " +
-        (isShrunk ? "h-12 bg-white/80 backdrop-blur-sm" : "h-16 bg-yellow-50/90")
+        (isShrunk ? "h-12 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm" : "h-16 bg-white/90 dark:bg-gray-800/90")
       }
     >
       <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
         {/* Left: Hamburger button */}
         <button
-          className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2"
+          className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((s) => !s)}
@@ -81,7 +81,7 @@ export default function Navbar() {
 
         {/* Right: Contact button */}
         <a
-          className="px-4 py-2 rounded-md text-sm font-medium transition-all duration-200"
+          className="px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700"
           href="/contact"
         >
           Contact me
@@ -109,7 +109,7 @@ export default function Navbar() {
         {/* Panel */}
         <div
           className={
-            "relative bg-white/95 backdrop-blur-sm w-80 h-full shadow-lg overflow-auto"
+            "relative bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm w-80 h-full shadow-lg overflow-auto"
           }
           role="dialog"
           aria-modal="true"
@@ -117,10 +117,10 @@ export default function Navbar() {
           <div className="p-6">
             <div className="flex items-center justify-between mb-6">
               <a href="/" className="no-underline">
-                <span className="font-semibold text-lg">Sush's Galleria</span>
+                <span className="font-semibold text-lg text-gray-900 dark:text-gray-100">Sush's Galleria</span>
               </a>
               <button
-                className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2"
+                className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
                 aria-label="Close menu"
                 onClick={() => setMenuOpen(false)}
               >
@@ -131,9 +131,9 @@ export default function Navbar() {
             </div>
 
             <nav className="flex flex-col gap-4 text-lg">
-              <a className="block py-2 hover:bg-gray-100 rounded px-2" href="#features" onClick={() => setMenuOpen(false)}>Features</a>
-              <a className="block py-2 hover:bg-gray-100 rounded px-2" href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
-              <a className="block py-2 hover:bg-gray-100 rounded px-2" href="#about" onClick={() => setMenuOpen(false)}>About</a>
+              <a className="block py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded px-2 text-gray-900 dark:text-gray-100" href="#features" onClick={() => setMenuOpen(false)}>Features</a>
+              <a className="block py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded px-2 text-gray-900 dark:text-gray-100" href="#pricing" onClick={() => setMenuOpen(false)}>Pricing</a>
+              <a className="block py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded px-2 text-gray-900 dark:text-gray-100" href="#about" onClick={() => setMenuOpen(false)}>About</a>
               <a
                 className="mt-3 inline-block px-4 py-2 rounded-md font-medium bg-blue-500 text-white hover:bg-blue-600"
                 href="/signup"

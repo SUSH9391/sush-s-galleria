@@ -59,21 +59,25 @@ export default function Navbar() {
           </svg>
         </button>
 
-        {/* Center: Logo */}
-        <div className="flex items-center gap-4">
-          <a className="flex items-center no-underline" href="/">
-            <div
-              className={
-                "transition-transform duration-300 ease-in-out transform " +
-                (isShrunk ? "scale-90" : "scale-100")
-              }
-              style={{ transformOrigin: "center" }}
-            >
-              {/* Replace with svg/logo */}
-              <span className="font-semibold text-lg">Sush's Galleria</span>
-            </div>
-          </a>
-        </div>
+       {/* Center: Logo */}
+<div className="flex items-center gap-4">
+  <a className="flex items-center no-underline" href="/">
+    <div
+      className={
+        "transition-transform duration-300 ease-in-out " +
+        (isShrunk ? "scale-85" : "scale-100")
+      }
+      style={{ transformOrigin: "center" }}
+    >
+      <img
+        src="/SUSH'S_GALLERIA.png"
+        alt="Sush's Galleria"
+        className="h-12 w-auto"   // bigger logo
+      />
+    </div>
+  </a>
+</div>
+
 
         {/* Right: Contact button */}
         <a

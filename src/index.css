@@ -1,1 +1,273 @@
 @import "tailwindcss";
+
+/* index.css
+   Global styles + helpers for the navbar & mobile menu.
+   Works alongside Tailwind utilities — these are complementary helpers.
+*/
+
+/* ---------- Reset & sensible defaults ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-kerning: normal;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* System font stack (Apple-friendly fallback) */
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+
+  /* Theme colors (tweak to taste) */
+  --bg: 255 255 255; /* used as RGB for alpha-friendly utilities */
+  --muted: 99 102 241; /* example accent Hue (indigo-ish) */
+  --text: 17 24 39; /* dark text RGB */
+  --surface: 247 247 249; /* subtle card bg */
+  --glass: 255 255 255; /* glass background RGB */
+  --shadow: 0 0 0; /* shadow color base */
+
+  /* sizes */
+  --navbar-height: 5rem; /* default (80px) */
+  --navbar-height-shrunk: 3rem; /* shrunk (48px) */
+  --navbar-transition: 300ms;
+  --logo-height: 3rem; /* 48px */
+  --logo-height-shrunk: 2.25rem; /* 36px */
+
+  --radius: 0.5rem;
+}
+
+/* Apply font globally */
+html, body, button, input, select, textarea {
+  font-family: var(--font-sans);
+  line-height: 1.4;
+  color: rgb(var(--text));
+  background-color: rgb(var(--bg));
+}
+
+/* ---------- Utility helpers ---------- */
+.container-max {
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Small helper to center the logo transform origin for scaling */
+.logo-scale-center {
+  transform-origin: center;
+  transition: transform var(--navbar-transition) ease-in-out;
+}
+
+/* Focus rings for accessibility (visible on keyboard focus) */
+:focus {
+  outline: none;
+}
+:focus-visible {
+  outline: 3px solid rgba(99,102,241,0.18);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ---------- Header / Navbar ---------- */
+/* Use this on the <header> element. We keep it opinionated but not prescriptive. */
+header.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: var(--navbar-height);
+  display: flex;
+  align-items: center;
+  backdrop-filter: blur(6px);
+  background: linear-gradient(180deg, rgba(var(--glass), 0.0), rgba(var(--glass), 0.02));
+  transition: height var(--navbar-transition) ease, background-color var(--navbar-transition) ease, box-shadow var(--navbar-transition) ease;
+}
+
+/* Shrunk state — either toggle by adding the class .is-shrunk to the header
+   or rely on inline Tailwind class toggling as you already have. */
+header.site-header.is-shrunk {
+  height: var(--navbar-height-shrunk);
+  background-color: rgba(var(--glass), 0.88);
+  box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+}
+
+/* Inner row that constrains content */
+header .site-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+}
+
+/* Logo image sizing (used alongside the img classes you already add) */
+.logo-img {
+  height: var(--logo-height);
+  width: auto;
+  display: block;
+  transition: height var(--navbar-transition) ease, transform var(--navbar-transition) ease;
+}
+header.is-shrunk .logo-img,
+header.site-header.is-shrunk .logo-img {
+  height: var(--logo-height-shrunk);
+}
+
+/* Optional: smaller scale when shrunk (if you prefer scaling instead of direct height change) */
+.logo-scale-center.shrink-scale {
+  transform: scale(1);
+}
+header.is-shrunk .logo-scale-center.shrink-scale {
+  transform: scale(.9);
+}
+
+/* ---------- Desktop nav links ---------- */
+.nav-links {
+  display: none; /* keep default hidden, Tailwind will show at md breakpoint in your markup */
+  gap: 1.25rem;
+  align-items: center;
+}
+@media (min-width: 768px) {
+  .nav-links { display: flex; }
+}
+.nav-links a {
+  text-decoration: none;
+  padding: 0.25rem 0.125rem;
+  border-radius: 6px;
+  color: inherit;
+  transition: color 180ms ease, background-color 180ms ease;
+}
+.nav-links a:hover,
+.nav-links a:focus {
+  text-decoration: underline;
+}
+
+/* CTA button style (used if you need a small consistent default) */
+.cta {
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  background: linear-gradient(180deg, rgba(99,102,241,1), rgba(79,70,229,1));
+  color: white;
+  box-shadow: 0 6px 18px rgba(79,70,229,0.12);
+}
+.cta:active { transform: translateY(1px); }
+.cta.small { padding: 0.35rem 0.7rem; font-size: 0.9rem; }
+
+/* ---------- Mobile hamburger & menu ---------- */
+.hamburger-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem;
+  border-radius: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  .hamburger-btn { display: none; }
+}
+
+/* Mobile overlay panel — by default hidden above viewport */
+.mobile-panel {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 40;
+  transform: translateY(-100%);
+  transition: transform var(--navbar-transition) ease;
+  pointer-events: none;
+}
+.mobile-panel[aria-hidden="false"],
+.mobile-panel.open {
+  transform: translateY(0%);
+  pointer-events: auto;
+}
+
+/* Backdrop layered under the panel to dim page content */
+.mobile-panel .backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.32);
+  pointer-events: auto;
+}
+
+/* Panel content */
+.mobile-panel .panel {
+  position: relative;
+  background: rgba(var(--bg), 0.98);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 12px 30px rgba(2,6,23,0.12);
+  padding: 1.25rem;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+
+/* mobile nav links list */
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+.mobile-nav a {
+  display: block;
+  text-decoration: none;
+  padding: 0.6rem 0.5rem;
+  border-radius: 8px;
+}
+.mobile-nav a:active,
+.mobile-nav a:focus,
+.mobile-nav a:hover {
+  background: rgba(15,23,42,0.04);
+}
+
+/* ---------- Body helpers ---------- */
+/* Toggle this class with JS to prevent background scroll while menu is open */
+.body-no-scroll {
+  overflow: hidden;
+}
+
+/* ---------- Misc helpers ---------- */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+/* ---------- Color scheme tweaks ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: 10 10 12;
+    --text: 238 241 245;
+    --surface: 19 20 22;
+    --glass: 8 8 10;
+  }
+  body { background: rgb(var(--bg)); color: rgb(var(--text)); }
+  header.site-header { background: linear-gradient(180deg, rgba(var(--glass), 0.06), rgba(var(--glass),0.12)); }
+  .mobile-panel .panel { background: rgba(6,8,10,0.7); color: rgb(var(--text)); }
+}

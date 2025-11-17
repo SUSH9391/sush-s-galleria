@@ -97,7 +97,8 @@ const HeroSection = () => {
 
 
         <button className="bg-white text-black px-8 py-3 rounded-full hover:bg-gray-200 transition-colors inter-font">
-          Explore Now
+          <a href="#explore">Explore Now</a>
+          
         </button>
       </div>
     </section>

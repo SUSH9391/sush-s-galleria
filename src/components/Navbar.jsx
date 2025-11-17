@@ -119,11 +119,10 @@ export default function Navbar() {
           <div className="p-6">
             <div className="flex items-center justify-between mb-6">
               <a href="/" className="no-underline">
-                <span className="font-semibold text-lg text-gray-900 dark:text-gray-100">Sush's Galleria</span>
+                <span className="font-semibold text-lg text-white">Sush's Galleria</span>
               </a>
               <button
                 className="p-2 rounded-md outline-none"
-
                 aria-label="Close menu"
                 onClick={() => setMenuOpen(false)}
               >
@@ -134,10 +133,10 @@ export default function Navbar() {
             </div>
 
             <nav className="flex flex-col gap-4 text-lg">
-              <a className="block py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded px-2 text-gray-900 dark:text-gray-100" href="#features" onClick={() => setMenuOpen(false)}>Frontend Activites</a>
-              <a className="block py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded px-2 text-gray-900 dark:text-gray-100" href="#pricing" onClick={() => setMenuOpen(false)}>Fullstack Activites</a>
-              <a className="block py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded px-2 text-gray-900 dark:text-gray-100" href="#about" onClick={() => setMenuOpen(false)}>Cybersecurity Services</a>
-              <a className="block py-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded px-2 text-gray-900 dark:text-gray-100" href="#about" onClick={() => setMenuOpen(false)}>AI Services</a>
+              <a className="block py-2 hover:bg-gray-700 rounded px-2 text-white" href="#features" onClick={() => setMenuOpen(false)}>Frontend Activities</a>
+              <a className="block py-2 hover:bg-gray-700 rounded px-2 text-white" href="#pricing" onClick={() => setMenuOpen(false)}>Fullstack Activities</a>
+              <a className="block py-2 hover:bg-gray-700 rounded px-2 text-white" href="#about" onClick={() => setMenuOpen(false)}>Cybersecurity Services</a>
+              <a className="block py-2 hover:bg-gray-700 rounded px-2 text-white" href="#about" onClick={() => setMenuOpen(false)}>AI Services</a>
               <div className="md:hidden">
                 <a
                   className="mt-3 inline-block px-4 py-2 rounded-md font-medium bg-black text-white hover:bg-gray-800"

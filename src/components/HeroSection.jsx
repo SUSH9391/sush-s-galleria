@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 
 const HeroSection = () => {
   const staticPart = "Discover amazing ";
   const initialWord = "art and creativity";
-  const phrases = [
+  const phrases = useMemo(() => [
     "Frontend Activities",
     "Fullstack Activities",
     "Cybersecurity Services",
     "AI Services",
-  ];
+  ], []);
 
   // dynamic part after the staticPart
   const [displayed, setDisplayed] = useState("");
